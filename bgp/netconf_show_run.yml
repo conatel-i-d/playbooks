@@ -1,0 +1,13 @@
+---
+- hosts: all
+  vars:
+    ansible_connection: network_cli
+    ansible_network_os: iosxr
+  tasks:
+    - name: Get running configuration and state data
+      netconf_get:
+        display: json
+      register: output
+
+    - debug:
+        var: output

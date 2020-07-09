@@ -8,3 +8,7 @@
       iosxr_command:
         commands: show version
       when: ansible_network_os == 'iosxr'
+      register: output
+
+    - debug:
+        var: output

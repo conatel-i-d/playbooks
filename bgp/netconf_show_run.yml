@@ -1,6 +1,8 @@
 ---
 - hosts: all
   gather_facts: false
+  vars:
+    ansible_connection: netconf
   tasks:
     - name: Get running configuration and state data
       netconf_get:

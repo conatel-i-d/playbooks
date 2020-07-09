@@ -3,6 +3,7 @@
   gather_facts: false
   vars:
     ansible_connection: netconf
+    ansible_port: 830
   tasks:
     - name: Get running configuration and state data
       netconf_get:

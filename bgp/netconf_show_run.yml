@@ -15,4 +15,4 @@
       register: output
 
     - debug:
-        var: { output["stdout"] }
+        var: output["stdout"]

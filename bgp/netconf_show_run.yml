@@ -10,9 +10,9 @@
   tasks:
     - name: Get running configuration and state data
       netconf_get:
-        display: json
+        display: pretty
         source: running
       register: output
 
     - debug:
-        var: output
+        var: { output["stdout"] }

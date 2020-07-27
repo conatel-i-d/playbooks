@@ -10,7 +10,6 @@
   tasks:
     - name: Get running configuration and state data
       netconf_get:
-        display: pretty
         source: running
       register: output
 

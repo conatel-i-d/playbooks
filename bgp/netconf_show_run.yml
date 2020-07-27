@@ -15,6 +15,9 @@
         source: running
       register: output
 
+    - debug:
+        var: output
+
     - xml:
         xmlstring: '{{ output["stdout"] }}'
         xpath: '/data/bgp/instance'

@@ -11,6 +11,7 @@
     - name: Get running configuration and state data
       netconf_get:
         source: running
+        filter: '/data/bgp'
       register: output
 
     - debug:

@@ -13,6 +13,7 @@
       netconf_get:
         display: xml
         source: running
+        filter: /bgp
       register: output
 
     - debug:

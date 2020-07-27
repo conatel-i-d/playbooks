@@ -16,7 +16,7 @@
       register: output
 
     - debug:
-        var: output
+        msg: '{{ output["stdout_lines"] | join("") }}'
 
     - xml:
         xmlstring: '{{ output["stdout_lines"] | join("") }}'

@@ -7,6 +7,7 @@
     ansible_user: conatel
     ansible_password: C0n4t3l
     ansible_port: 830
+    ansible_python: /usr/bin/python
   tasks:
     - name: Get running configuration and state data
       netconf_get:

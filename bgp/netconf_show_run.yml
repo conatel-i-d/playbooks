@@ -19,7 +19,7 @@
         var: output
 
     - xml:
-        xmlstring: '{{ output["stdout"] }}'
+        xmlstring: '{{ output["stdout_lines"] | join("") }}'
         xpath: '/data/bgp/instance'
       register: output
 

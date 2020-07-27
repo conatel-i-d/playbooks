@@ -13,7 +13,7 @@
       netconf_get:
         display: xml
         source: running
-        filter: '<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"></data>'
+        filter: '<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0"><bgp /></data>'
       register: output
 
     - debug:

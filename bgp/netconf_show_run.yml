@@ -16,7 +16,7 @@
       register: output
 
     - xml:
-        xmlstring: output["stdout"]
+        xmlstring: '{{ output["stdout"] }}'
         xpath: '/bgp/instance'
       register: output
 

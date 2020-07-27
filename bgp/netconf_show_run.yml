@@ -13,8 +13,13 @@
       netconf_get:
         display: xml
         source: running
-        filter: '<bgp><instance /></bgp>'
+      register: output
+
+    - xml:
+        xmlstring: output["stdout"]
+        xpath: '/bgp/instance'
       register: output
 
     - debug:
-        var: output["stdout"]
+        var: output
+

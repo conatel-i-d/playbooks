@@ -3,7 +3,7 @@
   gather_facts: false
   vars:
     ansible_connection: netconf
-    ansible_network_os: iosxr
+    ansible_network_os: default
     ansible_user: conatel
     ansible_password: C0n4t3l
     ansible_port: 830

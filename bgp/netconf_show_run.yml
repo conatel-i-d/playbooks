@@ -13,7 +13,12 @@
       netconf_get:
         display: json
         source: running
-        filter: <bgp xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg"><instance /></bgp>
+        filter: >
+          <bgp xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg">
+            <instance>
+              <instance-as />
+            </instance>
+          </bgp>
         lock: never
       register: json_output
 

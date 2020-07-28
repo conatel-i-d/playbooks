@@ -67,10 +67,10 @@
             (hold_times | default([])) 
             + [item["{http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg}hold-time"]]
           }}
-      loop: '{{ xml_output["matches"] }}'
+      loop: '{{ xml_output["matches"] | default([]) }}'
 
     - debug:
-        var: >
+        msg: >
           {{
             neighbor_group_names
             | zip(keepalive_intervals)

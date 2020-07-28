@@ -70,11 +70,11 @@
           }}
 
     - debug:
-        msg: >
-          {{
-            neighbor_group_names
-            | zip(keepalive_intervals)
-            | zip(hold_times)
-            | list
-          }}
+        var: neighbor_group_names
+
+    - debug:
+        var: keepalive_intervals
+
+    - debug:
+        var: hold_times
 

@@ -15,6 +15,10 @@
         source: running
         filter: <bgp xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg"><instance /></bgp>
         lock: never
+      output: json_output
+
+    - debug:
+        var: json_output
 
     - name: Get running configuration and state data
       netconf_get:

@@ -75,5 +75,6 @@
             neighbor_group_names
             | zip(keepalive_intervals)
             | zip(hold_times)
+            | list
           }}
 

@@ -24,6 +24,53 @@
           y: http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg 
       register: output
 
+    - set_fact:
+        neighbor_group_names: >
+          {{ 
+            (neighbor_group_names | default([])) 
+            + item["{http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg}neighbor-group-name"] 
+          }}
+      loop: output["matches"]
+
+    - xml:
+        xmlstring: '{{ output["stdout_lines"] | join("") }}'
+        xpath: '/x:data/y:bgp/y:instance/y:instance-as/y:four-byte-as/y:default-vrf/y:bgp-entity/y:neighbor-groups/y:neighbor-group/y:timers/y:keepalive-interval'
+        content: text
+        namespaces:
+          x: urn:ietf:params:xml:ns:netconf:base:1.0
+          y: http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg 
+        register: output
+
+    - set_fact:
+        keepalive_intervals: >
+          {{ 
+            (keepalive_intervals | default([])) 
+            + item["{http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg}keepalive-interval"] 
+          }}
+      loop: output["matches"]
+      
+    - xml:
+        xmlstring: '{{ output["stdout_lines"] | join("") }}'
+        xpath: '/x:data/y:bgp/y:instance/y:instance-as/y:four-byte-as/y:default-vrf/y:bgp-entity/y:neighbor-groups/y:neighbor-group/y:timers/y:keepalive-interval'
+        content: text
+        namespaces:
+          x: urn:ietf:params:xml:ns:netconf:base:1.0
+          y: http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg 
+        register: output
+
+    - set_fact:
+        hold_times: >
+          {{ 
+            (hold_times | default([])) 
+            + item["{http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg}hold-time"] 
+          }}
+      loop: output["matches"]
+
     - debug:
-        var: output
+        var: >
+          {{
+            neighbor_group_names
+            | zip(keepalive_intervals)
+            | zip(hold_times)
+          }}
 

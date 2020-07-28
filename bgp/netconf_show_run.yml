@@ -19,7 +19,7 @@
         xml_running_config: '{{ output["stdout_lines"] | join("") }}'
 
     - xml:
-        xmlstring: xml_running_config
+        xmlstring: '{{ xml_running_config }}'
         xpath: '/x:data/y:bgp/y:instance/y:instance-as/y:four-byte-as/y:default-vrf/y:bgp-entity/y:neighbor-groups/y:neighbor-group/y:neighbor-group-name'
         content: text
         namespaces:
@@ -36,7 +36,7 @@
       loop: '{{ xml_output["matches"] }}'
 
     - xml:
-        xmlstring: xml_running_config
+        xmlstring: '{{ xml_running_config }}'
         xpath: '/x:data/y:bgp/y:instance/y:instance-as/y:four-byte-as/y:default-vrf/y:bgp-entity/y:neighbor-groups/y:neighbor-group/y:timers/y:keepalive-interval'
         content: text
         namespaces:
@@ -53,7 +53,7 @@
       loop: '{{ xml_output["matches"] }}'
       
     - xml:
-        xmlstring: xml_running_config
+        xmlstring: '{{ xml_running_config }}'
         xpath: '/x:data/y:bgp/y:instance/y:instance-as/y:four-byte-as/y:default-vrf/y:bgp-entity/y:neighbor-groups/y:neighbor-group/y:timers/y:keepalive-interval'
         content: text
         namespaces:

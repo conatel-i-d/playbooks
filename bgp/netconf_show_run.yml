@@ -18,7 +18,7 @@
       output: json_output
 
     - debug:
-    #     var: json_output
+        var: json_output
 
     # - name: Get running configuration and state data
     #   netconf_get:

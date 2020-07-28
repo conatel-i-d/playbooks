@@ -28,7 +28,7 @@
         neighbor_group_names: >
           {{ 
             (neighbor_group_names | default([])) 
-            + item["{http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg}neighbor-group-name"] 
+            + [item["{http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg}neighbor-group-name"]]
           }}
       loop: '{{ output["matches"] }}'
 
@@ -45,7 +45,7 @@
         keepalive_intervals: >
           {{ 
             (keepalive_intervals | default([])) 
-            + item["{http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg}keepalive-interval"] 
+            + [item["{http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg}keepalive-interval"]]
           }}
       loop: '{{ output["matches"] }}'
       
@@ -62,7 +62,7 @@
         hold_times: >
           {{ 
             (hold_times | default([])) 
-            + item["{http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg}hold-time"] 
+            + [item["{http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg}hold-time"]]
           }}
       loop: '{{ output["matches"] }}'
 

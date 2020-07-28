@@ -12,6 +12,7 @@
     - name: get schema list using subtree w/ namespaces
       netconf_get:
         display: json
+        source: running
         filter: <bgp xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg"><instance /></bgp>
         lock: never
 

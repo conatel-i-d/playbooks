@@ -17,7 +17,7 @@
 
     - xml:
         xmlstring: '{{ output["stdout_lines"] | join("") }}'
-        xpath: '/x:data/y:bgp/y:instance/y:instance-as/y:four-byte-as/y:default-vrf/y:global/y:router-id'
+        xpath: '/x:data/y:bgp/y:instance/y:instance-as/y:four-byte-as/y:default-vrf/y:bgp-entity/y:neighbor-groups/y:neighbor-group/y:neighbor-group-name'
         content: text
         namespaces:
           x: urn:ietf:params:xml:ns:netconf:base:1.0

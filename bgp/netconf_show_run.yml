@@ -11,7 +11,7 @@
   tasks:
     - name: Get Neighbor Groups
       netconf_get:
-        display: json
+        display: pretty
         source: running
         filter: >
           <bgp xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg">
@@ -35,7 +35,7 @@
 
     - name: Get neighbors
       netconf_get:
-        display: json
+        display: pretty
         source: running
         filter: >
           <bgp xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg">

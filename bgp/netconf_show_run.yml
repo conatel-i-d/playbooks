@@ -29,11 +29,11 @@
 
     - set_fact:
         neighbor_group_names: >
-          {{ 
-            (neighbor_group_names | default([])) 
-            + [item["{http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg}neighbor-group-name"]]
+          {{
+            xml_output["matches"]
+            | map(attribute="{http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg}neighbor-group-name")
+            | list
           }}
-      loop: '{{ xml_output["matches"] }}'
 
     - xml:
         xmlstring: '{{ xml_running_config }}'
@@ -46,15 +46,15 @@
 
     - set_fact:
         keepalive_intervals: >
-          {{ 
-            (keepalive_intervals | default([])) 
-            + [item["{http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg}keepalive-interval"]]
+          {{
+            xml_output["matches"]
+            | map(attribute="{http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg}keepalive-interval")
+            | list
           }}
-      loop: '{{ xml_output["matches"] }}'
       
     - xml:
         xmlstring: '{{ xml_running_config }}'
-        xpath: '/x:data/y:bgp/y:instance/y:instance-as/y:four-byte-as/y:default-vrf/y:bgp-entity/y:neighbor-groups/y:neighbor-group/y:timers/y:keepalive-interval'
+        xpath: '/x:data/y:bgp/y:instance/y:instance-as/y:four-byte-as/y:default-vrf/y:bgp-entity/y:neighbor-groups/y:neighbor-group/y:timers/y:hold-time'
         content: text
         namespaces:
           x: urn:ietf:params:xml:ns:netconf:base:1.0
@@ -63,11 +63,11 @@
 
     - set_fact:
         hold_times: >
-          {{ 
-            (hold_times | default([])) 
-            + [item["{http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg}hold-time"]]
+          {{
+            xml_output["matches"]
+            | map(attribute="{http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg}hold-time")
+            | list
           }}
-      loop: '{{ xml_output["matches"] | default([]) }}'
 
     - debug:
         msg: >

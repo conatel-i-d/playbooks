@@ -42,7 +42,7 @@
         namespaces:
           x: urn:ietf:params:xml:ns:netconf:base:1.0
           y: http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg 
-        register: xml_output
+      register: xml_output
 
     - set_fact:
         keepalive_intervals: >
@@ -59,7 +59,7 @@
         namespaces:
           x: urn:ietf:params:xml:ns:netconf:base:1.0
           y: http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg 
-        register: xml_output
+      register: xml_output
 
     - set_fact:
         hold_times: >

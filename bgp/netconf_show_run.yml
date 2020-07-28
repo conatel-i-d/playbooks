@@ -18,74 +18,74 @@
       output: json_output
 
     - debug:
-        var: json_output
+    #     var: json_output
 
-    - name: Get running configuration and state data
-      netconf_get:
-        display: xml
-        source: running
-      register: output
+    # - name: Get running configuration and state data
+    #   netconf_get:
+    #     display: xml
+    #     source: running
+    #   register: output
 
-    - set_fact:
-        xml_running_config: '{{ output["stdout_lines"] | join("") }}'
+    # - set_fact:
+    #     xml_running_config: '{{ output["stdout_lines"] | join("") }}'
 
-    - xml:
-        xmlstring: '{{ xml_running_config }}'
-        xpath: '/x:data/y:bgp/y:instance/y:instance-as/y:four-byte-as/y:default-vrf/y:bgp-entity/y:neighbor-groups/y:neighbor-group/y:neighbor-group-name'
-        content: text
-        namespaces:
-          x: urn:ietf:params:xml:ns:netconf:base:1.0
-          y: http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg 
-      register: xml_output
+    # - xml:
+    #     xmlstring: '{{ xml_running_config }}'
+    #     xpath: '/x:data/y:bgp/y:instance/y:instance-as/y:four-byte-as/y:default-vrf/y:bgp-entity/y:neighbor-groups/y:neighbor-group/y:neighbor-group-name'
+    #     content: text
+    #     namespaces:
+    #       x: urn:ietf:params:xml:ns:netconf:base:1.0
+    #       y: http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg 
+    #   register: xml_output
 
-    - set_fact:
-        neighbor_group_names: >
-          {{
-            xml_output["matches"]
-            | map(attribute="{http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg}neighbor-group-name")
-            | list
-          }}
+    # - set_fact:
+    #     neighbor_group_names: >
+    #       {{
+    #         xml_output["matches"]
+    #         | map(attribute="{http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg}neighbor-group-name")
+    #         | list
+    #       }}
 
-    - xml:
-        xmlstring: '{{ xml_running_config }}'
-        xpath: '/x:data/y:bgp/y:instance/y:instance-as/y:four-byte-as/y:default-vrf/y:bgp-entity/y:neighbor-groups/y:neighbor-group/y:timers/y:keepalive-interval'
-        content: text
-        namespaces:
-          x: urn:ietf:params:xml:ns:netconf:base:1.0
-          y: http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg 
-      register: xml_output
+    # - xml:
+    #     xmlstring: '{{ xml_running_config }}'
+    #     xpath: '/x:data/y:bgp/y:instance/y:instance-as/y:four-byte-as/y:default-vrf/y:bgp-entity/y:neighbor-groups/y:neighbor-group/y:timers/y:keepalive-interval'
+    #     content: text
+    #     namespaces:
+    #       x: urn:ietf:params:xml:ns:netconf:base:1.0
+    #       y: http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg 
+    #   register: xml_output
 
-    - set_fact:
-        keepalive_intervals: >
-          {{
-            xml_output["matches"]
-            | map(attribute="{http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg}keepalive-interval")
-            | list
-          }}
+    # - set_fact:
+    #     keepalive_intervals: >
+    #       {{
+    #         xml_output["matches"]
+    #         | map(attribute="{http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg}keepalive-interval")
+    #         | list
+    #       }}
       
-    - xml:
-        xmlstring: '{{ xml_running_config }}'
-        xpath: '/x:data/y:bgp/y:instance/y:instance-as/y:four-byte-as/y:default-vrf/y:bgp-entity/y:neighbor-groups/y:neighbor-group/y:timers/y:hold-time'
-        content: text
-        namespaces:
-          x: urn:ietf:params:xml:ns:netconf:base:1.0
-          y: http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg 
-      register: xml_output
+    # - xml:
+    #     xmlstring: '{{ xml_running_config }}'
+    #     xpath: '/x:data/y:bgp/y:instance/y:instance-as/y:four-byte-as/y:default-vrf/y:bgp-entity/y:neighbor-groups/y:neighbor-group/y:timers/y:hold-time'
+    #     content: text
+    #     namespaces:
+    #       x: urn:ietf:params:xml:ns:netconf:base:1.0
+    #       y: http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg 
+    #   register: xml_output
 
-    - set_fact:
-        hold_times: >
-          {{
-            xml_output["matches"]
-            | map(attribute="{http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg}hold-time")
-            | list
-          }}
+    # - set_fact:
+    #     hold_times: >
+    #       {{
+    #         xml_output["matches"]
+    #         | map(attribute="{http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg}hold-time")
+    #         | list
+    #       }}
 
-    - debug:
-        var: neighbor_group_names
+    # - debug:
+    #     var: neighbor_group_names
 
-    - debug:
-        var: keepalive_intervals
+    # - debug:
+    #     var: keepalive_intervals
 
-    - debug:
-        var: hold_times
+    # - debug:
+    #     var: hold_times
 

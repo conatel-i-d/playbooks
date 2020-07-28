@@ -9,6 +9,12 @@
     ansible_port: 830
     ansible_python_interpreter: /usr/bin/python
   tasks:
+    - name: get schema list using subtree w/ namespaces
+      netconf_get:
+        display: json
+        filter: <data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"><bgp xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg"><instance /></bgp></data>
+        lock: never
+
     - name: Get running configuration and state data
       netconf_get:
         display: xml

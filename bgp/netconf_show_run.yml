@@ -15,14 +15,17 @@
         source: running
       register: output
 
+    - set_fact:
+        xml_running_config: '{{ output["stdout_lines"] | join("") }}'
+
     - xml:
-        xmlstring: '{{ output["stdout_lines"] | join("") }}'
+        xmlstring: xml_running_config
         xpath: '/x:data/y:bgp/y:instance/y:instance-as/y:four-byte-as/y:default-vrf/y:bgp-entity/y:neighbor-groups/y:neighbor-group/y:neighbor-group-name'
         content: text
         namespaces:
           x: urn:ietf:params:xml:ns:netconf:base:1.0
           y: http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg 
-      register: output
+      register: xml_output
 
     - set_fact:
         neighbor_group_names: >
@@ -30,16 +33,16 @@
             (neighbor_group_names | default([])) 
             + [item["{http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg}neighbor-group-name"]]
           }}
-      loop: '{{ output["matches"] }}'
+      loop: '{{ xml_output["matches"] }}'
 
     - xml:
-        xmlstring: '{{ output["stdout_lines"] | join("") }}'
+        xmlstring: xml_running_config
         xpath: '/x:data/y:bgp/y:instance/y:instance-as/y:four-byte-as/y:default-vrf/y:bgp-entity/y:neighbor-groups/y:neighbor-group/y:timers/y:keepalive-interval'
         content: text
         namespaces:
           x: urn:ietf:params:xml:ns:netconf:base:1.0
           y: http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg 
-        register: output
+        register: xml_output
 
     - set_fact:
         keepalive_intervals: >
@@ -47,16 +50,16 @@
             (keepalive_intervals | default([])) 
             + [item["{http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg}keepalive-interval"]]
           }}
-      loop: '{{ output["matches"] }}'
+      loop: '{{ xml_output["matches"] }}'
       
     - xml:
-        xmlstring: '{{ output["stdout_lines"] | join("") }}'
+        xmlstring: xml_running_config
         xpath: '/x:data/y:bgp/y:instance/y:instance-as/y:four-byte-as/y:default-vrf/y:bgp-entity/y:neighbor-groups/y:neighbor-group/y:timers/y:keepalive-interval'
         content: text
         namespaces:
           x: urn:ietf:params:xml:ns:netconf:base:1.0
           y: http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg 
-        register: output
+        register: xml_output
 
     - set_fact:
         hold_times: >
@@ -64,7 +67,7 @@
             (hold_times | default([])) 
             + [item["{http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg}hold-time"]]
           }}
-      loop: '{{ output["matches"] }}'
+      loop: '{{ xml_output["matches"] }}'
 
     - debug:
         var: >

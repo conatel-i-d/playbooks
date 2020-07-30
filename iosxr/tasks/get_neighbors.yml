@@ -1,0 +1,30 @@
+- name: Get Neighbors
+  register: result
+  netconf_get:
+    display: json
+    source: running
+    filter: >
+      <bgp xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-ipv4-bgp-cfg">
+        <instance>
+          <instance-as>
+            <four-byte-as>
+              <default-vrf>
+                <bgp-entity>
+                  <neighbors>
+                    <neighbor />
+                  </neighbors>
+                </bgp-entity>
+              </default-vrf>
+            </four-byte-as>
+          </instance-as>
+        </instance>
+      </bgp>
+
+- name: Get Neighbors result
+  set_fact:
+    neighbors: "{{ result | json_query('output.data.bgp.instance.\"instance-as\".\"four-byte-as\".\"default-vrf\".\"bgp-entity\".neighbors.neighbor') }}"
+
+- name: Convert to list
+  set_fact:
+    neighbors: '{{ [neighbors] }}'
+  when: (neighbors | type_debug) != 'list'

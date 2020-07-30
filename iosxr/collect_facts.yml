@@ -1,0 +1,13 @@
+---
+- name: Read IOS-XR Configuration
+  hosts: all
+  gather_facts: no
+  vars:
+    ansible_connection: network_cli
+    ansible_network_os: iosxr
+  tasks:
+    - name: Collect facts from IOS-XR routers
+      iosxr_facts:
+        gather_subset:
+          - config
+      register: config

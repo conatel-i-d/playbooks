@@ -1,0 +1,23 @@
+- name: Audit IOS-XR BFG Configuration
+  hosts: all
+  gather_facts: no
+  vars:
+    ansible_connection: network_cli
+    ansible_port: 22
+    ansible_network_os: iosxr
+    ansible_python_interpreter: /Users/gmonne/.pyenv/shims/python
+  tasks:
+    - name: Get Neighbor-Groups
+      import_tasks: './tasks/get_neighbor_groups.yml'
+      vars:
+        ansible_connection: netconf
+        ansible_port: 830
+    
+    - name: Check the timer configuration
+      iosxr_command:
+        match: all
+        commands: "show bgp neighbor-group {{ item['neighbor-group-name'] }} configuration nvgen"
+        wait_for: 
+          - result[0] contains 'timers 10 30 3'
+      loop: '{{ neighbor_groups }}'
+      ignore_errors: yes

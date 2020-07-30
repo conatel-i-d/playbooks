@@ -1,0 +1,16 @@
+---
+  - hosts: all
+    gather_facts: no
+    vars:
+      ansible_network_os: iosxr
+      ansible_python_interpreter: /Users/gmonne/.pyenv/shims/python
+    tasks:
+      - name: Get Neighbors
+        import_tasks: './tasks/get_neighbors.yml'
+        vars:
+          ansible_connection: netconf
+          ansible_port: 830
+
+
+  
+  

@@ -1,12 +1,14 @@
 ---
 - hosts: all
+  gather_facts: false
   vars:
     ansible_connection: network_cli
     ansible_network_os: iosxr
   tasks:
     - name: Retrieve IOS-XR version
       iosxr_command:
-        commands: show running-config | begin router bgp
+        commands: >
+          show running-config | begin router bgp
       when: ansible_network_os == 'iosxr'
       register: output
 

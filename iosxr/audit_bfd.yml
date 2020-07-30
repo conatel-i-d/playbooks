@@ -1,0 +1,29 @@
+- name: Audit IOS-XR BFG Configuration
+  hosts: all
+  gather_facts: no
+  vars:
+    ansible_connection: network_cli
+    ansible_network_os: iosxr
+    ansible_python_interpreter: /usr/bin/python
+  tasks:
+    - name: Check that bfd configuration
+      iosxr_command:
+        match: all
+        commands: >
+          show bgp neighbors {{ item }} configuration nvgen
+        wait_for: 
+          - result[0] contains 'bfd fast-detect'
+          - result[0] contains 'bfd multiplier 7'
+          - result[0] contains 'bfd mininterval 6500'
+      loop: '{{ neighbors }}'
+      ignore_errors: yes
+
+    - name: Check the neighbor-group timer configuration
+      iosxr_command:
+        match: all
+        commands: >
+          show bgp neighbor-group telefonica_test configuration nvgen
+        wait_for: 
+          - result[0] contains 'timers 10 30 3'
+      loop: '{{ neighbor_groups }}'
+      ignore_errors: yes

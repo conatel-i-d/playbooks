@@ -1,0 +1,17 @@
+---
+- name: Update IOS-XR Banner
+  hosts: all
+  gather_facts: no
+  vars:
+    ansible_connection: netconf
+    ansible_network_os: iosxr
+    ansible_port: 830
+  tasks:
+    - name: Set welcome banner
+      iosxr_banner:
+        banner: login
+        text: '{{ lookup("file", "./banner.txt") }}'
+        state: present
+          
+        
+                                            

@@ -1,0 +1,16 @@
+---
+- hosts: all
+  gather_facts: false
+  vars:
+    ansible_connection: netconf
+    ansible_network_os: iosxr
+    ansible_python_interpreter: /Users/gmonne/.pyenv/shims/python
+  tasks:
+    - name: Get Running Config
+      register: result
+      netconf_get:
+        display: json
+        source: running
+
+    - debug:
+        var: result

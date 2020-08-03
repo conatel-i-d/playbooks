@@ -4,8 +4,20 @@
   vars:
     ansible_connection: network_cli
     ansible_network_os: iosxr
-    ansible_python_interpreter: /usr/bin/python
+    ansible_python_interpreter: /Users/gmonne/.pyenv/shims/python
   tasks:
+    - name: Get Neighbors
+      import_tasks: './tasks/get_neighbors.yml'
+      vars:
+        ansible_connection: netconf
+        ansible_port: 830
+
+    - name: Get Neighbor-Groups
+      import_tasks: './tasks/get_neighbor_groups.yml'
+      vars:
+        ansible_connection: netconf
+        ansible_port: 830
+
     - name: Check that bfd configuration
       iosxr_command:
         match: all

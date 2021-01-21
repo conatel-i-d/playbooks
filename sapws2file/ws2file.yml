@@ -3,7 +3,7 @@
   vars_files:
     - ./vars.yml    
   tasks:
-  - name: consume ws
+  - name: consume ws a
     uri: 
       url: "{{uribcu}}"
       method: POST

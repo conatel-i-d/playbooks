@@ -9,9 +9,15 @@
 
   - debug:
       var: ruta.stdout
+  - template:
+      src: "{{ item.src }}"
+      dest: "{{ item.dest }}"
+    with_items:
+    - { src:  request_gr1.xml , dest: "{{requestfile1}}" }
+    - { src:  request_gr2.xml, dest: "{{requestfile2}}" }
+    
   - command: "date +'%Y-%m-%d' -d '-1 days'"
     register: fecha
-
   - name: Replace fecha desde
     replace:
       path: "{{item}}"

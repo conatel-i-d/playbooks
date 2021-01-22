@@ -1,9 +1,23 @@
 - hosts: localhost
+  connection: local
   gather_facts: no
   vars_files:
     - ./vars.yml    
   tasks:
-  - name: consume ws a
+
+  - command: "date +'%Y-%m-%d' -d '-1 days'"
+    register: fecha
+
+  - name: Replace fecha desde
+    replace:
+      path: "{{item}}"
+      regexp: '[12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])'
+      replace: '{{fecha.stdout}}'
+    with_items:
+    - "{{requestfile1}}"
+    - "{{requestfile2}}"
+
+  - name: consume ws 
     uri: 
       url: "{{uribcu}}"
       method: POST
@@ -14,5 +28,5 @@
       src: "{{ item.src }}"
       dest: "{{ item.dest }}"
     with_items:
-    - { src: ./request_gr1.xml, dest: ./coti.xml }
-    - { src: ./request_gr1.xml, dest: ./coti2.xml }   
+    - { src: "{{requestfile1}}", dest: "{{cotfile1}}" }
+    - { src: "{{requestfile2}}", dest: "{{cotfile2}}" }   

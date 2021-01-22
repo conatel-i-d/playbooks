@@ -1,4 +1,8 @@
 ---
 uribcu: https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones?wsdl
-path_server:
-
+path_server: /usr/sap/tmp/
+local_path: /home/dcremona/workspace/sapws2file/
+requestfile1: "{{local_path}}request_gr1.xml"
+requestfile2: "{{local_path}}request_gr2.xml"
+cotfile1: "{{local_path}}coti1.xml"
+cotfile2: "{{local_path}}coti2.xml"

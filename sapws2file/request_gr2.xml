@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="Cotiza">
+
+<SOAP-ENV:Body>
+
+<ns1:wsbcucotizaciones.Execute>
+
+  <ns1:Entrada>
+
+        <ns1:Moneda>
+
+          <ns1:item>0</ns1:item>
+
+        </ns1:Moneda>
+
+        <ns1:FechaDesde>2021-01-20</ns1:FechaDesde>
+
+        <ns1:FechaHasta>2021-01-20</ns1:FechaHasta>
+
+        <ns1:Grupo>2</ns1:Grupo>
+
+      </ns1:Entrada>
+
+    </ns1:wsbcucotizaciones.Execute>
+
+  </SOAP-ENV:Body>
+
+</SOAP-ENV:Envelope>

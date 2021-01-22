@@ -1,4 +1,4 @@
-  - hosts: localhost
+- hosts: localhost
   connection: local
   gather_facts: no
   vars_files:
@@ -6,8 +6,9 @@
   tasks:
   - command: "pwd"
     register: ruta
+
   - debug:
-      var: ruta
+      var: ruta.stdout
   - command: "date +'%Y-%m-%d' -d '-1 days'"
     register: fecha
 

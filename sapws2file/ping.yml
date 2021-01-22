@@ -1,0 +1,3 @@
+- hosts: sapserver
+  tasks:
+  - ping:

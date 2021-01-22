@@ -1,6 +1,6 @@
 ---
 uribcu: https://cotizaciones.bcu.gub.uy/wscotizaciones/servlet/awsbcucotizaciones?wsdl
-path_server: /usr/sap/tmp/
+path_server: D:\\Aplicaciones\\SAP_FILES\\FI\\COTIZACION\\
 local_path: /tmp/
 requestfile1: "{{local_path}}request_gr1.xml"
 requestfile2: "{{local_path}}request_gr2.xml"

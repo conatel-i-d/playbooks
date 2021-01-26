@@ -4,7 +4,7 @@
   vars_files:
     - ./vars.yml    
   tasks:
-  #copia request a carpeta contenedor
+  #copia request a carpeta temporal del contenedor
   - template:
       src: "{{ item.src }}"
       dest: "{{ item.dest }}"
